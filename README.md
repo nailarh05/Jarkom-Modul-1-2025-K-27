@@ -7,6 +7,107 @@
 
 ## write up 
 
+Soal:
+
+IP Address Host : 10.15.43.32 (Gunakan Jaringan/VPN ITS)
+
+The Ainulindalë
+
+Sebuah kisah awal mula pembentukan dunia telah dibuka. Eru Ilúvatar atau yang nantinya disebut Eru adalah sang pencipta. Eru menciptakan roh-roh abadi yang disebut Ainur. Mereka adalah "anak-anak dari buah pikirannya". Eru meminta para Ainur untuk menciptakan musik agung bersama-sama. Melalui musik ini, sebuah visi tentang dunia yang akan datang (alam semesta) muncul. Ainu terkuat, Melkor, menjadi sombong dan memasukkan tema-tema sumbang dan egois ke dalam musik, menciptakan disonansi. Ini adalah asal mula kejahatan di alam semesta. Manwë Súlimo yang nantinya disebut Manwe adalah Ainu yang paling memahami kehendak Eru. Selama Musik Penciptaan, dialah yang menjadi konduktor utama untuk tema-tema dari Eru, sering kali berkonflik langsung dengan disonansi yang diciptakan Melkor. Ainur lainnya yang terlibat dalam pembentukan alam semesta dan turun ke Arda (Bumi) yaitu Varda Elentári (Varda) dan Ulmo.
+
+1. Untuk mempersiapkan pembuatan entitas selain mereka, Eru yang berperan sebagai Router membuat dua Switch/Gateway. Dimana Switch 1 akan menuju ke dua Ainur yaitu Melkor dan Manwe. Sedangkan Switch 2 akan menuju ke dua Ainur lainnya yaitu Varda dan Ulmo. Keempat Ainur tersebut diberi perintah oleh Eru untuk menjadi Client.
+
+<img width="625" height="559" alt="image" src="https://github.com/user-attachments/assets/c12d680b-93bb-4366-b776-5a0657ac4727" />
+
+2. Karena menurut Eru pada saat itu Arda (Bumi) masih terisolasi dengan dunia luar, maka buat agar Eru dapat tersambung ke internet.
+  Menghubungkan eru ke internet
+
+<img width="672" height="579" alt="image" src="https://github.com/user-attachments/assets/51cab979-cfe7-45d5-8cae-4bd982367bd9" />
+
+ 3. Sekarang pastikan agar setiap Ainur (Client) dapat terhubung satu sama lain.
+
+	a. mengatur konfigurasi masing - masing node agar dapat terhubung satu sama 	lain.
+ 
+	 - Eru
+		```
+  		auto eth0
+		iface eth0 inet dhcp
+
+		auto eth1
+		iface eth1 inet static
+			address 192.212.1.1
+			netmask 255.255.255.0
+
+		auto eth2
+		iface eth2 inet static
+			address 192.212.2.1
+			netmask 255.255.255.0
+  
+		```
+  	- Melkor
+		```
+		auto eth0
+		iface eth0 inet dhcp
+
+		auto eth1
+		iface eth1 inet static
+			address 192.212.1.1
+			netmask 255.255.255.0
+
+		auto eth2
+		iface eth2 inet static
+			address 192.212.2.1
+			netmask 255.255.255.0
+   		```
+   	- Manwe
+      ```
+		auto eth0
+		iface eth0 inet static
+			address 192.212.1.3
+			netmask 255.255.255.0
+			gateway 192.212.1.1
+      ```
+    - Varda
+      ```
+    	auto eth0
+		iface eth0 inet static
+			address 192.212.2.2
+			netmask 255.255.255.0
+			gateway 192.212.2.1
+
+      ```
+
+	- Ulmo
+	  ```
+   		auto eth0
+		iface eth0 inet static
+			address 192.212.2.3
+			netmask 255.255.255.0
+			gateway 192.212.2.1
+
+      ```
+   4. Setelah berhasil terhubung, sekarang Eru ingin agar setiap Ainur (Client) dapat mandiri. Oleh karena itu pastikan agar setiap Client dapat tersambung ke internet.
+      - masuk ke node eru dengan telnet
+        <img width="727" height="546" alt="image" src="https://github.com/user-attachments/assets/4b825559-736a-4b46-b5ec-f23161e6b3b7" />
+	 - masuk ke node melkor
+		<img width="605" height="154" alt="image" src="https://github.com/user-attachments/assets/20f82cbe-5dd8-4911-a3f8-19f5e85ff9b3" />
+	- masuk ke node manwe
+	<img width="595" height="155" alt="image" src="https://github.com/user-attachments/assets/7927b560-15e6-40c4-aa17-14df35f5dc3a" />
+	- masuk ke node varda
+		<img width="605" height="154" alt="image" src="https://github.com/user-attachments/assets/d730e614-fb2e-454a-9d13-07718903b695" />
+	- masuk ke node ulmo
+		<img width="594" height="149" alt="image" src="https://github.com/user-attachments/assets/43631e7a-f6fc-4742-b853-c7d6d2ce017a" />
+
+	
+5. Ainur terkuat Melkor tetap berusaha untuk menanamkan kejahatan ke dalam Arda (Bumi). Sebelum terjadi kerusakan, Eru dan para Ainur lainnya meminta agar semua konfigurasi tidak hilang saat semua node di restart.
+	- Memasukkan ke dalam root(/root/.bashrc) script yang ingin dijalankan, agar setiap kali Node Eru dibuka menggunakan telnet script tersebut langsung dijalankan
+   <img width="840" height="493" alt="image" src="https://github.com/user-attachments/assets/fdab766c-b842-4238-a59f-430514c44b58" />
+
+
+
+
+
+
 14. Setelah gagal mengakses FTP, Melkor melancarkan serangan brute force terhadap  Manwe. Analisis file capture yang disediakan dan identifikasi upaya brute force Melkor. 
 (link file) nc 10.15.43.32 3401
 
@@ -59,8 +160,10 @@ usb itu bisa aja kybord dll bagaiamana cara identivikasinya jadi sama kayak prot
    Format: string
 
  gimana kita baca paket wireshark menggunakan pyhton, lalu kita membuat 3 file dalam 1 folder ya itu ada file hidden.py  hiddenmsg.pcapng  pyhton.py
+ 
 
   <img width="325" height="35" alt="image" src="https://github.com/user-attachments/assets/59db4e39-aa02-4493-ba0a-466116812966" />
+  
   
   <img width="572" height="605" alt="image" src="https://github.com/user-attachments/assets/a4b53f4c-06c7-4d8b-b7bb-d4ddff58cdb2" />
 
@@ -79,7 +182,7 @@ teks base 64 di ubah ke teks
 	(link file) nc 10.15.43.32 3403. 
   
 - what credential did the attacker use to log in?
-- 
+
 <img width="439" height="138" alt="Screenshot 2025-09-30 133122" src="https://github.com/user-attachments/assets/387a6ddc-4a1e-4e1c-9176-495bbbcd7d50" />
 
   format: user:pass
@@ -250,7 +353,7 @@ Congratulations! Here is your flag: KOMJAR25{Y0u_4re_J4rk0m_G0d_ta7dUNNvyi4Z4POr
 - What encryption method is used?
 Format: string
 
-trafik di dalamnya tidak be
+trafik di dalamnya tidak berjalan sebagai teks biasa seperti STMP/HTTP tetapi melalui protokol terenkripsi
 
 > TLS
 
