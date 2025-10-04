@@ -331,17 +331,22 @@ Format: string (name)
 
 protokol yang digunakan adalah SMTP biasa tanpa TLS, Karena email dikirim lewat koneksi yang tidak terenkripsi, buka file capture di Wireshark dan memfilter paket SMTP. Dalam protokol SMTP pengirim selalu terlihat di baris MAIL FROM: atau header From:. Dari situ langsung menemukan alamat dan nama pengirim pesan ancaman sehingga bisa mengidentifikasi siapa pengirimnya.
 
+<img width="511" height="156" alt="image" src="https://github.com/user-attachments/assets/d9113bbe-c53a-4d45-8b85-a166fa45a4eb" />
+
 > Your Life
 
 - How much ransom did the attacker demand ($)?
 Format: int
 
 Dari analisis paket SMTP (body email), penyerang menuntut tebusan sebesar $1600 — oleh karena itu jawaban (format int) adalah 1600.
+<img width="500" height="92" alt="image" src="https://github.com/user-attachments/assets/351e55f4-3d02-4a58-a29c-fb87fb20f7f5" />
 
 - What is the attacker's bitcoin wallet?
 Format: string
 
 membuka paket SMTP (bagian DATA) atau mengikuti aliran TCP yang berisi email, menemukan di body pesan baris yang berisi alamat dompet Bitcoin pelaku.
+<img width="929" height="95" alt="image" src="https://github.com/user-attachments/assets/a5f8d8d6-111e-4f9b-b705-d953528f4866" />
+
 
 > 1CWHmuF8dHt7HBGx5RKKLgg9QA2GmE3UyL
 
@@ -355,6 +360,9 @@ Format: string
 
 trafik di dalamnya tidak berjalan sebagai teks biasa seperti STMP/HTTP tetapi melalui protokol terenkripsi
 
+<img width="487" height="165" alt="image" src="https://github.com/user-attachments/assets/1cb58f36-82dc-426e-a33c-f55b8162de8f" />
+
+
 > TLS
 
 - What is the name of the malicious file placed by the attacker?
@@ -362,11 +370,17 @@ Format: file.exe
 
 memeriksa traffic dengan Wireshark dan menemukan bahwa objek malware dikirim lewat HTTP. Dengan menyesuaikan preferensi protokol (menonaktifkan/ubah pengenalan TLS atau menggunakan Decode As sehingga paket diinterpretasikan sebagai HTTP), lalu memfilter http dan menggunakan File → Export Objects → HTTP, saya dapat mengekstrak file malware tersebut.
 
+<img width="669" height="99" alt="image" src="https://github.com/user-attachments/assets/77f162c7-7f44-49e7-a3cd-71a8180ee618" />
+
+
 > invest_20.dll
 
 -What is the hash of the file containing the malware?
 Format: sha256
 sama seperti soal" sebelumnya 
+
+<img width="909" height="125" alt="image" src="https://github.com/user-attachments/assets/07086879-d6b7-450e-82f6-bec21f96aab5" />
+
 
 > 31cf42b2a7c5c558f44cfc67684cc344c17d4946d3a1e0b2cecb8eb58173cb2f
 
